@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            border: 1px solid gray;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid gray;
+            text-align: center;
+        }
+
+        th {
+            background: gray;
+        }
+
+        .count {
+            margin: 0 8px;
+        }
+    </style>
+</head>
+<body>
+<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script src="formart-utils.js"></script>
+
+<div id="app"></div>
+
+<script type="text/babel">
+    class App extends React.Component {
+        constructor (props) {
+            super(props);
+
+            this.state = {
+                bookList: [
+                    {
+                        id: 1,
+                        name: '《算法导论》',
+                        time: '2006-9',
+                        price: 85,
+                        count: 1
+                    },
+                    {
+                        id: 2,
+                        name: '《UNIX编程艺术》',
+                        time: '2006-2',
+                        price: 59,
+                        count: 1
+                    },
+                    {
+                        id: 3,
+                        name: '《编程珠玑》',
+                        time: '2008-10',
+                        price: 39,
+                        count: 1
+                    },
+                    {
+                        id: 4,
+                        name: '《代码大全》',
+                        time: '2006-3',
+                        price: 128,
+                        count: 1
+                    }
+                ]
+            }
+        }
+        renderBookList () {
+            return (
+                <div>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>书籍名称</th>
+                            <th>日期</th>
+                            <th>价格</th>
+                            <th>购买数量</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {
+                            this.state.bookList.map((item) => {
+                                return (<tr>
+                                    <td>{item.id}</td>
+                                    <td>{item.name}</td>
+                                    <td>{item.time}</td>
+                                    <td>{formartPrice(item.price)}</td>
+                                    <td>
+                                        <button disabled={item.count <= 1} onClick={() => this.changeCount(item, 'decrement')}>-</button>
+                                        <span className="count">{item.count}</span>
+                                        <button onClick={() => this.changeCount(item, 'increment')}>+</button>
+                                    </td>
+                                    <td>
+                                        <button onClick={() => this.removeItem(item)}>移除</button>
+                                    </td>
+                                </tr>)
+                            })
+                        }
+                        </tbody>
+                    </table>
+                    <h2>总价格：{this.sum()}</h2>
+                </div>
+            )
+        }
+
+        renderEmptyTips () {
+            return <h2>购物车为空~</h2>
+        }
+
+        render () {
+            return this.state.bookList.length >= 1 ? this.renderBookList() : this.renderEmptyTips()
+        }
+
+        changeCount (item, type) {
+            // const newBooks = [...this.state.bookList]
+            // newBooks[id - 1].count += 1
+            // this.setState({
+            //     bookList: newBooks
+            // })
+            this.setState({
+                bookList: this.state.bookList.map((o) => {
+                    if (o.id === item.id) {
+                        if (type === 'decrement' && item.count > 1) {
+                            o.count = o.count - 1
+                        } else if (type === 'increment') {
+                            o.count = o.count + 1
+                        }
+
+                    }
+                    return o
+                })
+            })
+        }
+
+        sum () {
+            // 1、for循环的方式
+            // let result = 0
+            // for (let item of this.state.bookList) {
+            //     result += item.price * item.count
+            // }
+            // return formartPrice(result)
+
+            // filter/map/reduce
+            // 参数一：上一次回调函数的结果（第一次没有上一次函数的回调函数的结果，使用初始化值）
+            const result = this.state.bookList.reduce((previousValue, item) => {
+                return previousValue + item.price * item.count
+            }, 0)
+            return formartPrice(result)
+        }
+
+        removeItem (item) {
+            // React中设计原则：state中数据的不可变性
+            this.setState({
+                bookList: this.state.bookList.filter(o => o.id !== item.id)
+            })
+        }
+    }
+
+    ReactDOM.render(<App/>, document.getElementById("app"))
+</script>
+
+</body>
+</html>

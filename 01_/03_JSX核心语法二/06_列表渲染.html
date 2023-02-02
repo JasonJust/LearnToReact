@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <div id="app"></div>
+
+  <script type="text/babel">
+    class App extends React.Component {
+      constructor (props) {
+        super(props);
+
+        this.state = {
+          movies: ['斗罗大陆', '斗破苍穹', '唐探三'],
+          numbers: [111, 222, 333, 444, 200]
+        }
+      }
+
+      render () {
+        const { movies, numbers } = this.state
+        return (
+          <div>
+            <h2>电影列表</h2>
+            <ul>
+              {
+                movies.map(item => {
+                  return <li>{item}</li>
+                })
+              }
+            </ul>
+            <h2>数字列表-过滤</h2>
+            <ul>
+              {
+                // numbers.filter((item) => {
+                //   return item >= 200 && (item % 2 === 0)
+                // }).join('、')
+                
+                numbers.filter((item) => item >= 200).map(item => <li>{item}</li>)
+              }
+            </ul>
+            <h2>数字列表-截取</h2>
+            <ul>
+              {
+                numbers.slice(0, 3).map(item => <li>{item}</li>)
+              }
+            </ul>
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(<App/>, document.getElementById("app"))
+  </script>
+  
+</body>
+</html>

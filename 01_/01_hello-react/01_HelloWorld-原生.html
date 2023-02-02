@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <h2 class="title"></h2>
+  <button onclick="changeWord()" class="btn">改变文本</button>
+
+  <script>
+    // 命令式编程：每做一个操作，都是给计算机（浏览器）一步命令
+    // 1、定义数据
+    let message = 'hello world'
+    // 2、将数据显示在h2元素中
+    const title = document.getElementsByClassName('title')[0]
+    title.innerHTML = message
+    // 3、点击按钮，界面数据发生改变
+
+    const btn = document.getElementsByClassName('btn')[0]
+    // btn.addEventListener('click', e => {
+    //   message = 'hello react'
+    //   title.innerHTML = message
+    // })
+    function changeWord () {
+      message = 'hello react'
+      title.innerHTML = message
+    }
+  </script>
+
+</body>
+</html>

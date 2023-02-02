@@ -1,0 +1,8 @@
+#app > .title {
+    color: gray;
+    font-weight: 100;
+}
+
+.books {
+    color: green;
+}

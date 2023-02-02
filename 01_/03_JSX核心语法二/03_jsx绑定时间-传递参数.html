@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <div id="app"></div>
+  <button class='btn'>原生按钮</button>
+
+  <script>
+    document.getElementsByClassName('btn')[0].addEventListener('click', (e) => {
+      console.log(e);
+    })
+  </script>
+
+  <script type="text/babel">
+    class App extends React.Component {
+      constructor (props) {
+        super(props);
+
+        this.state = {
+          movies: ['海贼王', '斗罗大陆', '斗破苍穹']
+        }
+        this.btnClick = this.btnClick.bind(this)
+      }
+
+      render () {
+        return (
+          <div>
+            <button onClick={this.btnClick}>-1</button>
+            <ul>
+              {
+                this.state.movies.map((item, index, array) => {
+                  return (
+                    <li className='item'
+                        onClick={ (e) => { this.movieDetails(item, index, array, event) }}>
+                      {item}
+                    </li>
+                  )
+                })
+              }
+            </ul>
+          </div>
+        )
+      }
+
+      btnClick (event) {
+        console.log(event);
+      }
+
+      movieDetails (item, index, array) {
+        console.log(item, index, array, event);
+      }
+    }
+
+    ReactDOM.render(<App/>, document.getElementById("app"))
+  </script>
+  
+</body>
+</html>
