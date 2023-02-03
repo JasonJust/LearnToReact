@@ -1,35 +1,6 @@
 import React, {PureComponent} from 'react';
-import styled from 'styled-components'
 
-const HomeWrapper = styled.div`
-    font-size: 50px;
-    color: orange;
-
-    .banner {
-      background: #61dafb;
-      
-      li {
-        color: #ffffff;
-      
-          &.active {
-            color: orange;
-          }
-          
-          &:hover {
-            color: gray;
-            cursor: pointer;
-          }
-          
-          &:after {
-            content: '  JasonJust.';
-          }
-      }
-    }
-`
-
-const TitleWrapper = styled.h2`
-    text-decoration: underline;
-`
+import { HomeWrapper, TitleWrapper } from "./style";
 
 export default class Home extends PureComponent {
     render () {
