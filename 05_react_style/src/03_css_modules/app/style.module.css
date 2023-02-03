@@ -2,6 +2,9 @@
     color: gray;
     font-weight: 100;
 }
+.titleName {
+    color: purple;
+}
 
 .books {
     color: green;

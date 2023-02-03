@@ -1,7 +1,5 @@
 import React, {PureComponent} from 'react';
 
-import appStyle from  './style.module.css'
-
 import Home from '../home'
 import Profile from '../profile'
 
@@ -10,8 +8,7 @@ export default class App extends PureComponent {
         return (
             <div id='app'>
                 app
-                <h2 className={appStyle.title}>我是app标题</h2>
-                <h2 className={appStyle.titleName}>我是app标题(驼峰)</h2>
+                <h2>我是app标题</h2>
                 <Home/>
                 <Profile/>
             </div>
