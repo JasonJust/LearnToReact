@@ -2,21 +2,21 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 // import reportWebVitals from './reportWebVitals';
 // import App from './App'
-import App from './commont/App'
+import App from './comment/App'
 import { ConfigProvider } from 'antd'
+import 'moment/locale/zh-cn'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     // 严格模式
   // <React.StrictMode>
-  //   <ConfigProvider theme={{
-  //       token: {
-  //           colorPrimary: 'orange'
-  //       }
-  //   }}>
-  //       <App />
-  //   </ConfigProvider>
-    <App />
+    <ConfigProvider theme={{
+        token: {
+            colorPrimary: 'orange'
+        }
+    }}>
+        <App />
+    </ConfigProvider>
   // </React.StrictMode>
 );
 
