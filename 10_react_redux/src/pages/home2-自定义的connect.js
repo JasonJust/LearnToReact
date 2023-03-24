@@ -1,0 +1,33 @@
+import React, {PureComponent} from 'react';
+
+import {connect} from "../utils/connect";
+import {addAction, incrementAction} from "../store/actionCreators";
+
+class Home extends PureComponent {
+    render () {
+        return (
+            <div>
+                <h1>Home</h1>
+                <h2>当前计数：{this.props.counter}</h2>
+                <button onClick={e => this.props.increment()}>+1</button>
+                <button onClick={e => this.props.addNumber(5)}>+5</button>
+                <hr/>
+            </div>
+        );
+    }
+}
+
+const mapStateToPoprs = state => ({
+    counter: state.counter
+})
+
+const mapDispatchToProps = dispatch => ({
+    increment () {
+        dispatch(incrementAction())
+    },
+    addNumber (num) {
+        dispatch(addAction(num))
+    }
+})
+
+export default connect(mapStateToPoprs, mapDispatchToProps)(Home)
