@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    // generator生成器
+    // 1、普通函数
+    // function foo() {
+    //     console.log('11111')
+    // }
+    //
+    // foo()
+
+    // // 2、生成函数的定义
+    // // 生成器函数（会返回一个迭代器）
+    // function *foo() {
+    //     console.log(11111)
+    //     yield 'Jaosn'
+    //     console.log(22222)
+    //     yield 'Just'
+    //     console.log(33333)
+    // }
+    //
+    // // // iterator：迭代器
+    // const result = foo()
+    // console.log(result)
+    //
+    // // 3、使用迭代器
+    // // 调用一次next，就会消耗一次迭代器，直到消耗完对象里的done才会变成true; done: true
+    // const res = result.next()
+    // const res2 = result.next()
+    // const res3 = result.next()
+    // console.log(res)
+    // console.log(res2)
+    // console.log(res3)
+
+    // 4、生成器函数中代码的执行顺序
+
+    // // 5、练习：定义一个生成器函数，一次可以生成1-10的数字
+    // function* generatorNumber () {
+    //     for (let i = 1; i <= 10; i++) {
+    //         yield i
+    //     }
+    // }
+    // const numIt = generatorNumber()
+    // console.log(numIt.next().value)
+
+    // 6、generaator和Promise一起来使用
+    function* bar () {
+        console.log(11111111111)
+        const result = yield new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve('There is Generator!')
+            }, 3000)
+        })
+        console.log(result)
+    }
+
+    const it = bar()
+    it.next().value.then((res) => {
+        it.next(res)
+    })
+</script>
+
+</body>
+</html>
