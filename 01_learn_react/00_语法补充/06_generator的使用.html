@@ -64,6 +64,11 @@
     it.next().value.then((res) => {
         it.next(res)
     })
+
+    // (preValue = 0, item) => {}  这部分称为reducer
+    // (state = defaultState, action) => {}
+
+    ['aa', 'bb', 'cc'].reduce((preValue, item) => {}, 0)
 </script>
 
 </body>
